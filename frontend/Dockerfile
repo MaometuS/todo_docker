@@ -7,6 +7,7 @@ FROM alpine
 RUN adduser -S -D -H -h /app appuser
 USER appuser
 COPY --from=builder /build/main /app/
-COPY views/ /app/views
 WORKDIR /app
+COPY main_page.gohtml .
+EXPOSE 8080
 CMD ["./main"]
