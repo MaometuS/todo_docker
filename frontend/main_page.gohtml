@@ -10,11 +10,12 @@
         {{range .Todos}}
         <li>
             {{.ID}}: 
-            <form action="/update_todo" method="post">
+            <form action="/edit_todo" method="post">
+                <input type="hidden" name="id" value="{{.ID}}">
                 <input type="text" name="name" value="{{.Name}}">
                 <button type="submit">Update</button>
             </form>
-            <a href="/delete_todo">Delete</a>
+            <a href="/delete_todo?id={{.ID}}">Delete</a>
         </li>
         {{end}}
     </ul>

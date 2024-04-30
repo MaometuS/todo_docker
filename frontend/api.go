@@ -115,7 +115,7 @@ func createTodo(name string) error {
 }
 
 func updateTodo(t *todo) error {
-	_, err := makeCall(rpcRequest{Method: "create_todo", Data: t})
+	_, err := makeCall(rpcRequest{Method: "update_todo", Data: t})
 	if err != nil {
 		return err
 	}
@@ -124,7 +124,7 @@ func updateTodo(t *todo) error {
 }
 
 func deleteTodo(id int64) error {
-	_, err := makeCall(rpcRequest{Method: "create_todo", Data: todo{ID: id}})
+	_, err := makeCall(rpcRequest{Method: "delete_todo", Data: todo{ID: id}})
 	if err != nil {
 		return err
 	}

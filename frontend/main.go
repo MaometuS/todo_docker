@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	amqp "github.com/rabbitmq/amqp091-go"
 )
@@ -11,13 +12,19 @@ import (
 var connection *amqp.Connection
 
 func main() {
-	mux := registerRoutes()
-
-	var err error
-	connection, err = amqp.Dial("amqp://guest:guest@localhost:5672/")
-	if err != nil {
-		log.Fatal(err)
+	fmt.Println("Waiting for amqp")
+	for {
+		var err error
+		connection, err = amqp.Dial("amqp://guest:guest@rabbitmq:5672/")
+		if err == nil {
+			break
+		} else {
+			log.Println(err)
+			time.Sleep(time.Second)
+		}
 	}
+
+	mux := registerRoutes()
 
 	fmt.Println("Frontend started on 8080")
 

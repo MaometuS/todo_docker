@@ -96,13 +96,6 @@ func handleDelivery(d amqp.Delivery, ctx context.Context) {
 }
 
 func route() {
-	var err error
-	conn, err = amqp.Dial("amqp://guest:guest@localhost:5672/")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer conn.Close()
-
 	chn, err := conn.Channel()
 	if err != nil {
 		log.Fatal(err)
